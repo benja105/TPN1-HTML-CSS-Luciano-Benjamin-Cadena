@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Clases - Fracture</title>
+  <link rel="stylesheet" href="css/estiloclases.css" />
+  <link rel="stylesheet" href="css/animaciones.css" />
+  <link rel="icon" href="img/fracture.ico" type="image/icon">
+  <link rel="stylesheet" href="css/dark-mode.css">
+  <style>
+    /* Oculta los radios sin usar inline */
+    input[type="radio"][name="filtro"] {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <nav class="mega-menu">
+      <a href="index.html" class="logo">FRACTURE</a>
+      <input type="checkbox" id="menu-toggle" class="menu-checkbox" />
+      <label for="menu-toggle" class="menu-icon">&#9776;</label>
+      <ul class="menu-links">
+        <li><a href="index.html">Inicio</a></li>
+        <li><a href="clases.html">Clases</a></li>
+        <li><a href="entrenadores.html">Entrenadores</a></li>
+        <li><a href="precios.html">Planes</a></li>
+        <li><a href="blog.html">Blog</a></li>
+        <li><a href="contacto.html">Contacto</a></li>
+        <li>
+          <button id="theme-toggle">Modo Oscuro</button>
+        </li>
+      </ul>
+    </nav>
+  </header>
+
+  <section class="contenido-filtrado">
+    <input type="radio" name="filtro" id="todos" checked>
+    <input type="radio" name="filtro" id="musculacion">
+    <input type="radio" name="filtro" id="crossfit">
+    <input type="radio" name="filtro" id="yoga">
+    <input type="radio" name="filtro" id="spinning">
+
+    <div class="filtros">
+      <label for="todos">Todas</label>
+      <label for="musculacion">Musculación</label>
+      <label for="crossfit">CrossFit</label>
+      <label for="yoga">Yoga</label>
+      <label for="spinning">Spinning</label>
+    </div>
+
+    <main class="galeria">
+      <div class="card musculacion">
+        <img src="img/musculacion.jpg" alt="Musculación">
+        <div class="overlay">
+          <h3>Musculación</h3>
+          <p>Fuerza y desarrollo muscular.</p>
+        </div>
+      </div>
+      <div class="card crossfit">
+        <img src="img/crossfit.jpg" alt="CrossFit">
+        <div class="overlay">
+          <h3>CrossFit</h3>
+          <p>Alta intensidad funcional.</p>
+        </div>
+      </div>
+      <div class="card yoga">
+        <img src="img/yoga.jpg" alt="Yoga">
+        <div class="overlay">
+          <h3>Yoga</h3>
+          <p>Equilibrio físico y mental.</p>
+        </div>
+      </div>
+      <div class="card spinning">
+        <img src="img/spinning.jpg" alt="Spinning">
+        <div class="overlay">
+          <h3>Spinning</h3>
+          <p>Cardio en bicicleta fija.</p>
+        </div>
+      </div>
+    </main>
+  </section>
+
+  <section class="horarios">
+    <h2>Horarios Semanales</h2>
+    <div class="tabla-scroll">
+      <table>
+        <thead>
+          <tr>
+            <th>Clase</th>
+            <th>Lunes</th>
+            <th>Martes</th>
+            <th>Miércoles</th>
+            <th>Jueves</th>
+            <th>Viernes</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="musculacion">
+            <td>Musculación</td>
+            <td>10:00</td>
+            <td>10:00</td>
+            <td>10:00</td>
+            <td>10:00</td>
+            <td>10:00</td>
+          </tr>
+          <tr class="crossfit">
+            <td>CrossFit</td>
+            <td>18:00</td>
+            <td>18:00</td>
+            <td>18:00</td>
+            <td>18:00</td>
+            <td>18:00</td>
+          </tr>
+          <tr class="yoga">
+            <td>Yoga</td>
+            <td>08:00</td>
+            <td></td>
+            <td>08:00</td>
+            <td></td>
+            <td>08:00</td>
+          </tr>
+          <tr class="spinning">
+            <td>Spinning</td>
+            <td>19:00</td>
+            <td>19:00</td>
+            <td>19:00</td>
+            <td>19:00</td>
+            <td>19:00</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <footer>
+    <div class="redes">
+      <a href="#">Facebook</a>
+      <a href="#">Instagram</a>
+      <a href="#">YouTube</a>
+    </div>
+    <p>&copy; 2025 Fracture - Todos los derechos reservados</p>
+  </footer>
+  <script>
+    // Modo Oscuro
+    const themeToggleBtn = document.getElementById('theme-toggle');
+    const body = document.body;
+    const header = document.querySelector('header');
+    const nav = document.querySelector('nav');
+    const menuLinks = document.querySelector('.menu-links');
+    const filtrosSection = document.querySelector('.filtros');
+    const filtrosLabels = document.querySelectorAll('.filtros label');
+    const galeriaSection = document.querySelector('.galeria');
+    const cards = document.querySelectorAll('.card');
+    const horariosSection = document.querySelector('.horarios');
+    const tabla = document.querySelector('table');
+    const tablaHead = document.querySelector('thead');
+    const tablaBody = document.querySelector('tbody');
+    const tablaFilas = document.querySelectorAll('tbody tr');
+    const redesSection = document.querySelector('.redes');
+    const footerElement = document.querySelector('footer');
+
+    themeToggleBtn.addEventListener('click', () => {
+      body.classList.toggle('dark-mode');
+      header.classList.toggle('dark-mode');
+      nav.classList.toggle('dark-mode');
+      if (menuLinks) {
+        menuLinks.classList.toggle('dark-mode');
+        menuLinks.querySelectorAll('a').forEach(link => link.classList.toggle('dark-mode-link'));
+        const themeButton = menuLinks.querySelector('#theme-toggle');
+        if (themeButton) {
+          themeButton.classList.toggle('dark-mode-button');
+        }
+      }
+      if (filtrosSection) {
+        filtrosSection.classList.toggle('dark-mode-section');
+        filtrosLabels.forEach(label => label.classList.toggle('dark-mode-label'));
+      }
+      if (galeriaSection) {
+        galeriaSection.classList.toggle('dark-mode-section');
+      }
+      cards.forEach(card => card.classList.toggle('dark-mode-card'));
+      if (horariosSection) {
+        horariosSection.classList.toggle('dark-mode-section');
+      }
+      if (tabla) {
+        tabla.classList.toggle('dark-mode-table');
+        if (tablaHead) tablaHead.classList.toggle('dark-mode-thead');
+        if (tablaBody) tablaBody.classList.toggle('dark-mode-tbody');
+        tablaFilas.forEach(fila => fila.classList.toggle('dark-mode-table-row'));
+      }
+      if (redesSection) {
+        redesSection.classList.toggle('dark-mode-section');
+        redesSection.querySelectorAll('a').forEach(a => a.classList.toggle('dark-mode-link'));
+      }
+      footerElement.classList.toggle('dark-mode-footer');
+
+      if (body.classList.contains('dark-mode')) {
+        themeToggleBtn.textContent = 'Modo Claro';
+      } else {
+        themeToggleBtn.textContent = 'Modo Oscuro';
+      }
+    });
+  </script>
+</body>
+</html>

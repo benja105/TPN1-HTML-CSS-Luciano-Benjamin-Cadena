@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gimnasio Fracture - Inicio</title>
+  <link rel="stylesheet" href="css/estiloindex.css">
+  <link rel="stylesheet" href="css/animaciones.css">
+  <link rel="icon" href="img/fracture.ico" type="image/icon">
+  <link rel="stylesheet" href="css/dark-mode.css"> </head>
+<body>
+    <header>
+        <nav class="mega-menu">
+          <a href="index.html" class="logo">FRACTURE</a>
+
+          <input type="checkbox" id="menu-toggle" class="menu-checkbox">
+          <label for="menu-toggle" class="menu-icon">&#9776;</label>
+
+          <ul class="menu-links">
+            <li><a href="index.html">Inicio</a></li>
+            <li><a href="clases.html">Clases</a></li>
+            <li><a href="entrenadores.html">Entrenadores</a></li>
+            <li><a href="precios.html">Planes</a></li>
+            <li><a href="blog.html">Blog</a></li>
+            <li><a href="contacto.html">Contacto</a></li>
+            <li>
+              <button id="theme-toggle">Modo Oscuro</button>
+            </li>
+          </ul>
+        </nav>
+    </header>
+
+  <section class="hero">
+    <video autoplay muted loop id="hero-video">
+      <source src="videos/entrenamiento.mp4" type="video/mp4">
+      Tu navegador no soporta video HTML5.
+    </video>
+    <div class="overlay">
+      <h1 class="anim-text">Transformá tu cuerpo, cambiá tu vida</h1>
+    </div>
+  </section>
+
+  <section class="clases-destacadas">
+    <h2>Clases destacadas</h2>
+    <div class="cards">
+      <div class="card">
+        <img src="img/crossfit.jpg" alt="CrossFit">
+        <h3>CrossFit</h3>
+      </div>
+      <div class="card">
+        <img src="img/yoga.jpg" alt="Yoga">
+        <h3>Yoga</h3>
+      </div>
+      <div class="card">
+        <img src="img/spinning.jpg" alt="Spinning">
+        <h3>Spinning</h3>
+      </div>
+    </div>
+  </section>
+
+  <section class="contador">
+    <img class="card" src="img/fracturegym.png">
+    <h2 class="contador-num" id="contador">0</h2>
+    <h2>Socios satisfechos</h2>
+  </section>
+
+  <section class="testimonios">
+    <input type="radio" name="carrusel" id="t1" checked style="display:none;">
+    <input type="radio" name="carrusel" id="t2" style="display:none;">
+    <input type="radio" name="carrusel" id="t3" style="display:none;">
+
+    <div class="testimonio" id="testimonio1">
+      <p>"Me cambió la vida. Gracias Fracture GYM!"</p>
+      <h4>- Ana P.</h4>
+    </div>
+    <div class="testimonio" id="testimonio2">
+      <p>"Entreno todos los días, ¡increíble ambiente!"</p>
+      <h4>- Marcos G.</h4>
+    </div>
+    <div class="testimonio" id="testimonio3">
+      <p>"Los entrenadores son muy profesionales."</p>
+      <h4>- Laura M.</h4>
+    </div>
+
+    <div class="nav-testimonios">
+      <label for="t1"></label>
+      <label for="t2"></label>
+      <label for="t3"></label>
+    </div>
+  </section>
+
+  <footer>
+    <div class="mapa">
+      <iframe src="https://www.openstreetmap.org/export/embed.html?bbox=-65.3%2C-24.2%2C-65.1%2C-24.1&amp;layer=mapnik" style="border:1px solid black"></iframe>
+    </div>
+    <div class="newsletter">
+      <form>
+        <label for="email">Suscribite al Newsletter para enterarte de todo sobre Fracture GYM!</label>
+        <input type="email" id="email" name="email" required>
+        <button type="submit">Enviar</button>
+      </form>
+    </div>
+    <div class="redes">
+      <a href="#">Facebook</a>
+      <a href="#">Instagram</a>
+      <a href="#">YouTube</a>
+    </div>
+    <p>&copy; 2025 Fracture - Todos los derechos reservados</p>
+  </footer>
+
+  <script>
+    const contadorElement = document.getElementById('contador');
+    let count = 0;
+    const target = 700;
+    const duration = 1000; // Duración de la animación en milisegundos
+    const step = Math.ceil(target / (duration / 16)); // Aproximadamente 60 FPS
+
+    function updateCounter() {
+      if (count < target) {
+        count += step;
+        contadorElement.textContent = Math.min(count, target) + "+";
+        requestAnimationFrame(updateCounter);
+      } else {
+        contadorElement.textContent = target + "+";
+      }
+    }
+
+    updateCounter();
+
+    // Modo Oscuro
+    const themeToggleBtn = document.getElementById('theme-toggle');
+    const body = document.body;
+    const header = document.querySelector('header');
+    const nav = document.querySelector('nav');
+    const menuLinks = document.querySelector('.menu-links');
+    const cards = document.querySelectorAll('.card');
+    const contadorSection = document.querySelector('.contador');
+    const testimoniosSection = document.querySelector('.testimonios');
+    const newsletterSection = document.querySelector('.newsletter');
+    const redesSection = document.querySelector('.redes');
+    const footerElement = document.querySelector('footer');
+
+    themeToggleBtn.addEventListener('click', () => {
+      body.classList.toggle('dark-mode');
+      header.classList.toggle('dark-mode');
+      nav.classList.toggle('dark-mode');
+      if (menuLinks) {
+        menuLinks.classList.toggle('dark-mode');
+        menuLinks.querySelectorAll('a').forEach(link => link.classList.toggle('dark-mode-link'));
+      }
+      cards.forEach(card => card.classList.toggle('dark-mode-card'));
+      contadorSection.classList.toggle('dark-mode-section');
+      testimoniosSection.classList.toggle('dark-mode-section');
+      newsletterSection.classList.toggle('dark-mode-section');
+      redesSection.classList.toggle('dark-mode-section');
+      footerElement.classList.toggle('dark-mode-footer');
+
+      if (body.classList.contains('dark-mode')) {
+        themeToggleBtn.textContent = 'Modo Claro';
+      } else {
+        themeToggleBtn.textContent = 'Modo Oscuro';
+      }
+    });
+  </script>
+</body>
+</html>

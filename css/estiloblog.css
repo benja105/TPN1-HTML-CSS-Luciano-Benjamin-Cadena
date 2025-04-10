@@ -1,0 +1,431 @@
+*,
+*::before,
+*::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    background-color: #f8f8f8; /* Modo Claro por defecto */
+    color: #333; /* Modo Claro por defecto */
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* HEADER */
+header {
+    background-color: #fff;
+    color: #000;
+    padding: 1rem 0;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.mega-menu {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1rem;
+    flex-wrap: wrap;
+}
+
+.mega-menu .logo {
+    font-size: 1.75rem;
+    font-weight: bold;
+    text-decoration: none;
+    color: #000;
+    transition: color 0.3s ease;
+}
+
+.mega-menu .logo:visited {
+    color: #000;
+}
+
+.menu-checkbox {
+    display: none;
+}
+
+.menu-icon {
+    display: none;
+    font-size: 2rem;
+    color: #000;
+    cursor: pointer;
+}
+
+.menu-links {
+    display: flex;
+    gap: 1.5rem;
+    list-style: none;
+    align-items: center;
+}
+
+.menu-links li a {
+    color: #000;
+    text-decoration: none;
+    padding: 0.75rem 1.25rem;
+    border-radius: 8px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.menu-links li a:hover,
+.menu-links li a:focus {
+    background-color: #eee;
+}
+
+.menu-links li button {
+    background: none;
+    border: none;
+    color: #000;
+    font-size: 1rem;
+    cursor: pointer;
+    padding: 0.75rem 1.25rem;
+    border-radius: 8px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.menu-links li button:hover,
+.menu-links li button:focus {
+    background-color: #eee;
+}
+
+@media (max-width: 768px) {
+    .menu-icon {
+        display: block;
+    }
+
+    .menu-links {
+        display: none;
+        flex-direction: column;
+        background-color: #fff;
+        position: absolute;
+        top: 100%;
+        right: 1rem;
+        width: calc(100% - 2rem);
+        border-radius: 8px;
+        padding: 1rem;
+        z-index: 999;
+        align-items: stretch;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+
+    .menu-checkbox:checked + .menu-icon + .menu-links {
+        display: flex;
+    }
+
+    .menu-links li {
+        margin: 0.5rem 0;
+    }
+
+    .menu-links li a,
+    .menu-links li button {
+        display: block;
+        padding: 0.75rem;
+        text-align: center;
+    }
+}
+
+/* SubHeader */
+.subheader {
+    text-align: center;
+}
+.subheader h1 {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+}
+
+/* Tags - Filtro CSS */
+.tags {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+    padding: 1rem;
+    background-color: #fff;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+.tags input {
+    display: none;
+}
+.tags label {
+    background: #eee;
+    color: #333;
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+.tags input:checked + label {
+    background: #f90;
+    color: white;
+}
+
+/* Newspaper layout */
+.newspaper {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 2rem;
+    margin-bottom: 3rem;
+    padding: 0 1rem;
+    max-width: 1200px;
+    margin: 0 auto;
+    background-color: #fff;
+    transition: background-color 0.3s ease;
+}
+
+/* Artículos */
+.post {
+    background: white;
+    color: #333;
+    padding: 1rem;
+    border-left: 5px solid #f90;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    opacity: 0;
+    transform: translateY(50px);
+    animation: reveal 1s ease forwards;
+    transition: background-color 0.3s ease, color 0.3s ease, border-left-color 0.3s ease, box-shadow 0.3s ease;
+}
+.post:nth-child(2) {
+    animation-delay: 0.3s;
+}
+.post:nth-child(3) {
+    animation-delay: 0.3s;
+}
+
+/* Scroll Reveal solo con animación al cargar */
+@keyframes reveal {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+body:has(#nutricion:checked) .post:not(.nutricion),
+body:has(#entrenamiento:checked) .post:not(.entrenamiento),
+body:has(#salud:checked) .post:not(.salud) {
+    display: none;
+}
+
+/* Comentarios */
+.comentarios {
+    background: #fff;
+    color: #333;
+    padding: 1rem;
+    border-top: 3px solid #f90;
+    max-width: 700px;
+    margin: 0 auto;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    transition: background-color 0.3s ease, color 0.3s ease, border-top-color 0.3s ease, box-shadow 0.3s ease;
+}
+.comentarios h3 {
+    margin-bottom: 1rem;
+}
+.comentario {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1rem;
+    background-color: #f9f9f9;
+    padding: 0.75rem;
+    border-radius: 5px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+.avatar {
+    width: 40px;
+    height: 40px;
+    background: #ccc;
+    border-radius: 50%;
+    margin-right: 1rem;
+    position: relative;
+}
+.avatar::before {
+    content: "";
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    background: #999;
+    border-radius: 50%;
+    top: 5px;
+    right: 5px;
+}
+
+
+/* FOOTER */
+footer {
+  background-color: #eee;
+  color: #000;
+  text-align: center;
+  padding: 1.5rem 1rem;
+  font-size: 0.9rem;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+footer p {
+  margin-top: 0.5rem;
+}
+
+/* REDES */
+.redes {
+  background-color: #eee;
+  color: #000;
+  padding: 1.5rem 1rem;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.redes a {
+  color: #000;
+  text-decoration: none;
+  font-size: 1.1rem;
+  transition: color 0.3s ease;
+}
+
+.redes a:hover,
+.redes a:focus {
+  color: #333;
+}
+
+/* dark-mode.css */
+
+/* Estilos específicos para el modo oscuro */
+
+body.dark-mode {
+    background-color: #000;
+    color: #eee;
+}
+
+body.dark-mode .menu-icon {
+    color: #eee;
+}
+
+header.dark-mode {
+    background-color: #000;
+    color: #eee;
+}
+
+.mega-menu.dark-mode .logo {
+    color: #eee;
+}
+
+.mega-menu.dark-mode .logo:visited {
+    color: #eee;
+}
+
+.mega-menu.dark-mode .menu-links li a {
+    color: #eee;
+}
+
+.mega-menu.dark-mode .menu-links li a:hover,
+.mega-menu.dark-mode .menu-links li a:focus {
+    background-color: #333;
+}
+
+.mega-menu.dark-mode .menu-links li button {
+    color: #eee;
+}
+
+.mega-menu.dark-mode .menu-links li button:hover,
+.mega-menu.dark-mode .menu-links li button:focus {
+    background-color: #333;
+}
+
+@media (max-width: 768px) {
+    .mega-menu.dark-mode .menu-links {
+        background-color: #000;
+        box-shadow: 0 2px 5px rgba(255, 255, 255, 0.1);
+    }
+}
+
+.subheader.dark-mode {
+    color: #eee;
+}
+
+.subheader.dark-mode h1 {
+    color: #eee;
+}
+
+.tags.dark-mode {
+    background-color: #000;
+    color: #eee;
+}
+
+.tags.dark-mode label {
+    background: #333;
+    color: #eee;
+}
+
+.tags.dark-mode input:checked + label {
+    background: #f90;
+    color: #000;
+}
+
+.newspaper.dark-mode-section {
+    background-color: #000;
+}
+
+.post.dark-mode-card {
+    background-color: #333;
+    color: #eee;
+    border-left-color: #f90;
+    box-shadow: 0 2px 5px rgba(255, 255, 255, 0.1);
+}
+
+.comentarios.dark-mode-section {
+    background-color: #222;
+    color: #111;
+    border-top-color: #f90;
+    box-shadow: 0 2px 5px rgba(255, 255, 255, 0.1);
+}
+
+.comentarios.dark-mode-section h3 {
+    color: #eee;
+}
+
+.comentario.dark-mode-card {
+    background-color: #444;
+    color: #eee;
+}
+
+.avatar.dark-mode-avatar {
+    background-color: #555;
+}
+
+.avatar.dark-mode-avatar::before {
+    background-color: #ccc;
+}
+
+footer.dark-mode-footer {
+    background-color: #000;
+    color: #eee;
+}
+
+.redes.dark-mode-section {
+    background-color: #000;
+    color: #eee;
+}
+
+.redes.dark-mode-section a.dark-mode-link {
+    color: #eee;
+}
+
+.redes.dark-mode-section a.dark-mode-link:hover {
+    color: #ddd;
+}
+
+.menu-links.dark-mode #theme-toggle.dark-mode-button {
+    color: #eee;
+    background-color: transparent;
+    border: none;
+}
+
+.menu-links.dark-mode #theme-toggle.dark-mode-button:hover,
+.menu-links.dark-mode #theme-toggle.dark-mode-button:focus {
+    background-color: #333;
+}

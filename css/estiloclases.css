@@ -1,0 +1,452 @@
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  line-height: 1.6;
+  background-color: #fff; /* Modo Claro por defecto: Blanco */
+  color: #000; /* Modo Claro por defecto: Negro */
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* HEADER */
+header {
+  background-color: #fff;
+  color: #000;
+  padding: 1rem 0;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.mega-menu {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1rem;
+  flex-wrap: wrap;
+}
+
+.mega-menu .logo {
+  font-size: 1.75rem;
+  font-weight: bold;
+  text-decoration: none;
+  color: #000;
+  transition: color 0.3s ease;
+}
+
+.mega-menu .logo:visited {
+  color: #000;
+}
+
+.menu-checkbox {
+  display: none;
+}
+
+.menu-icon {
+  display: none;
+  font-size: 2rem;
+  color: #000;
+  cursor: pointer;
+}
+
+.menu-links {
+  display: flex;
+  gap: 1.5rem;
+  list-style: none;
+  align-items: center;
+}
+
+.menu-links li a {
+  color: #000;
+  text-decoration: none;
+  padding: 0.75rem 1.25rem;
+  border-radius: 8px;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.menu-links li a:hover,
+.menu-links li a:focus {
+  background-color: #eee;
+}
+
+.menu-links li button {
+  background: none;
+  border: none;
+  color: #000;
+  font-size: 1rem;
+  cursor: pointer;
+  padding: 0.75rem 1.25rem;
+  border-radius: 8px;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.menu-links li button:hover,
+.menu-links li button:focus {
+  background-color: #eee;
+}
+
+@media (max-width: 768px) {
+  .menu-icon {
+    display: block;
+  }
+
+  .menu-links {
+    display: none;
+    flex-direction: column;
+    background-color: #fff;
+    position: absolute;
+    top: 100%;
+    right: 1rem;
+    width: calc(100% - 2rem);
+    border-radius: 8px;
+    padding: 1rem;
+    z-index: 999;
+    align-items: stretch;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  }
+
+  .menu-checkbox:checked + .menu-icon + .menu-links {
+    display: flex;
+  }
+
+  .menu-links li {
+    margin: 0.5rem 0;
+  }
+
+  .menu-links li a,
+  .menu-links li button {
+    display: block;
+    padding: 0.75rem;
+    text-align: center;
+  }
+}
+
+/* Filtros */
+.filtros {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+  padding: 1rem;
+  background-color: #fff;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.filtros input[type="radio"] {
+  display: none;
+}
+
+.filtros label {
+  background: #eee;
+  border: 2px solid transparent;
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: all 0.3s ease, background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+  font-weight: bold;
+  color: #333;
+}
+
+.filtros input[type="radio"]:checked + label {
+  background: #f90;
+  color: #fff;
+  border-color: #f90;
+}
+
+/* Ocultar tarjetas según el filtro */
+#musculacion:checked ~ .galeria .card:not(.musculacion),
+#crossfit:checked ~ .galeria .card:not(.crossfit),
+#yoga:checked ~ .galeria .card:not(.yoga),
+#spinning:checked ~ .galeria .card:not(.spinning) {
+  opacity: 0;
+  transform: scale(0.95);
+  pointer-events: none;
+}
+
+/* Galería tipo masonry */
+.galeria {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1rem;
+  padding: 0 1rem 3rem;
+  max-width: 1200px;
+  margin: auto;
+  background-color: #fff;
+  transition: background-color 0.3s ease;
+}
+
+
+.card {
+  width: 250px;
+  position: relative;
+  overflow: hidden;
+  border-radius: 10px;
+  transition: transform 0.3s ease, background-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
+  background-color: #fff;
+  color: #333;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.card:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.card img {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.card:hover img {
+  transform: scale(1.1);
+}
+
+.overlay {
+  position: absolute;
+  bottom: 0;
+  background: rgba(0,0,0,0.7);
+  color: white;
+  width: 100%;
+  padding: 1rem;
+  transform: translateY(100%);
+  transition: transform 0.3s ease, background-color 0.3s ease, color 0.3s ease;
+}
+
+.card:hover .overlay {
+  transform: translateY(0);
+}
+
+/* Filtrado por categoría usando solo CSS */
+#musculacion:checked ~ main .card:not(.musculacion),
+#crossfit:checked ~ main .card:not(.crossfit),
+#yoga:checked ~ main .card:not(.yoga),
+#spinning:checked ~ main .card:not(.spinning) {
+  display: none;
+}
+
+/* Tabla de horarios */
+.horarios {
+  padding: 2rem;
+  background-color: #fff;
+  text-align: center;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  color: #333;
+}
+/* Filtrado con animación para filas de la tabla */
+.horarios tr {
+  opacity: 1;
+  transform: scale(1);
+  transition: opacity 0.4s ease, transform 0.4s ease, background-color 0.3s ease, color 0.3s ease;
+  pointer-events: auto;
+}
+
+.tabla-scroll {
+  overflow-x: auto;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 1rem;
+  background-color: #fff;
+  color: #333;
+  border: 1px solid #ccc;
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+}
+
+th, td {
+  padding: 0.75rem;
+  border: 1px solid #ccc;
+  transition: border-color 0.3s ease, color 0.3s ease;
+}
+
+th {
+  background-color: #f0f0f0;
+  color: #333;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* FOOTER */
+footer {
+  background-color: #eee;
+  color: #000;
+  text-align: center;
+  padding: 1.5rem 1rem;
+  font-size: 0.9rem;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+footer p {
+  margin-top: 0.5rem;
+}
+
+/* REDES */
+.redes {
+  background-color: #eee;
+  color: #000;
+  padding: 1.5rem 1rem;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.redes a {
+  color: #000;
+  text-decoration: none;
+  font-size: 1.1rem;
+  transition: color 0.3s ease;
+}
+
+.redes a:hover,
+.redes a:focus {
+  color: #333;
+}
+
+/* dark-mode.css */
+
+/* Estilos específicos para el modo oscuro */
+
+body.dark-mode {
+  background-color: #000;
+  color: #eee;
+}
+
+body.dark-mode .menu-icon {
+  color: #eee;
+}
+
+header.dark-mode {
+  background-color: #000;
+  color: #eee;
+}
+
+.mega-menu.dark-mode .logo {
+  color: #eee;
+}
+
+.mega-menu.dark-mode .menu-links li a {
+  color: #eee;
+}
+
+.mega-menu.dark-mode .menu-links li a:hover,
+.mega-menu.dark-mode .menu-links li a:focus {
+  background-color: #333;
+}
+
+.mega-menu.dark-mode .menu-links li button {
+  color: #eee;
+}
+
+.mega-menu.dark-mode .menu-links li button:hover,
+.mega-menu.dark-mode .menu-links li button:focus {
+  background-color: #333;
+}
+
+@media (max-width: 768px) {
+  .mega-menu.dark-mode .menu-links {
+    background-color: #000;
+    box-shadow: 0 2px 5px rgba(255, 255, 255, 0.1);
+  }
+}
+
+.filtros.dark-mode-section {
+  background-color: #000;
+  color: #eee;
+}
+
+.filtros.dark-mode-section label.dark-mode-label {
+  background: #333;
+  color: #eee;
+  border-color: transparent;
+}
+
+.filtros.dark-mode-section input[type="radio"]:checked + label.dark-mode-label {
+  background: #f90;
+  color: #000;
+  border-color: #f90;
+}
+
+.galeria.dark-mode-section {
+  background-color: #000;
+}
+
+.card.dark-mode-card {
+  background-color: #333;
+  color: #eee;
+  box-shadow: 0 2px 8px rgba(255, 255, 255, 0.1);
+}
+
+.card.dark-mode-card .overlay {
+  background: rgba(0, 0, 0, 0.8);
+  color: #eee;
+}
+
+.horarios.dark-mode-section {
+  background-color: #222;
+  color: #eee;
+}
+
+.horarios.dark-mode-section h2 {
+  color: #eee; /* Asegura que el título "Horarios Semanales" sea visible */
+}
+
+table.dark-mode-table {
+  background-color: #333;
+  color: #eee;
+  border-color: #555;
+}
+
+table.dark-mode-table th {
+  background-color: #333;
+  color: #eee;
+  border-color: #555;
+}
+
+table.dark-mode-table td {
+  border-color: #555;
+  color: #eee;
+}
+
+footer.dark-mode-footer {
+  background-color: #000;
+  color: #eee;
+}
+
+.redes.dark-mode-section {
+  background-color: #000;
+  color: #eee;
+}
+
+.redes.dark-mode-section a.dark-mode-link {
+  color: #eee;
+}
+
+.redes.dark-mode-section a.dark-mode-link:hover {
+  color: #ddd;
+}
+
+.menu-links.dark-mode #theme-toggle.dark-mode-button {
+  color: #eee;
+  background-color: transparent;
+  border: none;
+}
+
+.menu-links.dark-mode #theme-toggle.dark-mode-button:hover,
+.menu-links.dark-mode #theme-toggle.dark-mode-button:focus {
+  background-color: #333;
+}

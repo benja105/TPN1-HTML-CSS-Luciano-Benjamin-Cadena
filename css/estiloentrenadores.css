@@ -1,0 +1,431 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f8f8f8;
+  color: #333;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* HEADER */
+header {
+  background-color: #fff;
+  color: #000;
+  padding: 1rem 0;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.mega-menu {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1rem;
+  flex-wrap: wrap;
+}
+
+.mega-menu .logo {
+  font-size: 1.75rem;
+  font-weight: bold;
+  text-decoration: none;
+  color: #000;
+  transition: color 0.3s ease;
+}
+
+.mega-menu .logo:visited {
+  color: #000;
+}
+
+.menu-checkbox {
+  display: none;
+}
+
+.menu-icon {
+  display: none;
+  font-size: 2rem;
+  color: #000;
+  cursor: pointer;
+}
+
+.menu-links {
+  display: flex;
+  gap: 1.5rem;
+  list-style: none;
+  align-items: center;
+}
+
+.menu-links li a {
+  color: #000;
+  text-decoration: none;
+  padding: 0.75rem 1.25rem;
+  border-radius: 8px;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.menu-links li a:hover,
+.menu-links li a:focus {
+  background-color: #eee;
+}
+
+.menu-links li button {
+  background: none;
+  border: none;
+  color: #000;
+  font-size: 1rem;
+  cursor: pointer;
+  padding: 0.75rem 1.25rem;
+  border-radius: 8px;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.menu-links li button:hover,
+.menu-links li button:focus {
+  background-color: #eee;
+}
+
+@media (max-width: 768px) {
+  .menu-icon {
+    display: block;
+  }
+
+  .menu-links {
+    display: none;
+    flex-direction: column;
+    background-color: #fff;
+    position: absolute;
+    top: 100%;
+    right: 1rem;
+    width: calc(100% - 2rem);
+    border-radius: 8px;
+    padding: 1rem;
+    z-index: 999;
+    align-items: stretch;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  }
+
+  .menu-checkbox:checked + .menu-icon + .menu-links {
+    display: flex;
+  }
+
+  .menu-links li {
+    margin: 0.5rem 0;
+  }
+
+  .menu-links li a,
+  .menu-links li button {
+    display: block;
+    padding: 0.75rem;
+    text-align: center;
+  }
+}
+
+/* Main contenido */
+.entrenadores-container {
+  text-align: center;
+  padding: 2rem;
+}
+
+.entrenadores-container h1 {
+  color: #333;
+  transition: color 0.3s ease;
+}
+
+.cards-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 2rem;
+  padding: 2rem;
+}
+
+/* Tarjeta Flip */
+.card-flip {
+  width: 300px;
+  height: 400px;
+  perspective: 1000px;
+}
+
+.card-inner {
+  width: 100%;
+  height: 100%;
+  transition: transform 0.8s;
+  transform-style: preserve-3d;
+  position: relative;
+}
+
+.card-flip:hover .card-inner {
+  transform: rotateY(180deg);
+}
+
+.card-front, .card-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  border-radius: 10px;
+  overflow: hidden;
+  background-color: #fff;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  transition: background-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
+  color: #333;
+}
+
+.card-front {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.card-front img {
+  width: 70%;
+  height: 70%;
+  object-fit: cover;
+}
+
+.card-front h3 {
+  padding: 1rem;
+  transition: color 0.3s ease;
+}
+
+.card-back {
+  transform: rotateY(180deg);
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+.card-back h3 {
+  transition: color 0.3s ease;
+}
+
+.card-back p {
+  transition: color 0.3s ease;
+}
+
+/* Barras de habilidad */
+.habilidad {
+  margin: 0.5rem 0;
+}
+
+.habilidad label {
+  display: block;
+  margin-bottom: 0.25rem;
+  transition: color 0.3s ease;
+}
+
+.barra {
+  background: #ddd;
+  height: 10px;
+  border-radius: 5px;
+  overflow: hidden;
+  transition: background-color 0.3s ease;
+}
+
+.relleno {
+  height: 100%;
+  background: #f90;
+  width: 0;
+  animation: expand 2s ease forwards;
+  transition: background-color 0.3s ease;
+}
+
+.fuerza90 { width: 90%; }
+.flex80 { width: 80%; }
+.flex95 { width: 95%; }
+.res75 { width: 75%; }
+.pot85 { width: 85%; }
+.vel80 { width: 80%; }
+
+
+@keyframes expand {
+  from { width: 0; }
+}
+
+/* Rating con estrellas */
+.rating {
+  position: relative;
+  font-size: 1.5rem;
+  color: #ccc;
+  transition: color 0.3s ease;
+}
+
+.rating .filled {
+  color: gold;
+  position: absolute;
+  top: 0;
+  left: 0;
+  overflow: hidden;
+  animation: fill-stars 2s ease forwards;
+  width: 100%;
+}
+
+@keyframes fill-stars {
+  from { width: 0; }
+  to { width: 100%; }
+}
+
+/* FOOTER */
+footer {
+  background-color: #eee;
+  color: #000;
+  text-align: center;
+  padding: 1.5rem 1rem;
+  font-size: 0.9rem;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+footer p {
+  margin-top: 0.5rem;
+}
+
+
+/* REDES */
+.redes {
+  background-color: #eee;
+  color: #000;
+  padding: 1.5rem 1rem;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.redes a {
+  color: #000;
+  text-decoration: none;
+  font-size: 1.1rem;
+  transition: color 0.3s ease;
+}
+
+.redes a:hover,
+.redes a:focus {
+  color: #333;
+}
+
+/* dark-mode.css */
+
+/* Estilos específicos para el modo oscuro */
+
+body.dark-mode {
+  background-color: #000;
+  color: #eee;
+}
+
+body.dark-mode .menu-icon {
+  color: #eee;
+}
+
+header.dark-mode {
+  background-color: #000;
+  color: #eee;
+}
+
+.mega-menu.dark-mode .logo {
+  color: #eee;
+}
+
+.mega-menu.dark-mode .menu-links li a {
+  color: #eee;
+}
+
+.mega-menu.dark-mode .menu-links li a:hover,
+.mega-menu.dark-mode .menu-links li a:focus {
+  background-color: #333;
+}
+
+.mega-menu.dark-mode .menu-links li button {
+  color: #eee;
+}
+
+.mega-menu.dark-mode .menu-links li button:hover,
+.mega-menu.dark-mode .menu-links li button:focus {
+  background-color: #333;
+}
+
+@media (max-width: 768px) {
+  .mega-menu.dark-mode .menu-links {
+    background-color: #000;
+    box-shadow: 0 2px 5px rgba(255, 255, 255, 0.1);
+  }
+}
+
+.entrenadores-container.dark-mode-section {
+  color: #eee;
+}
+
+.entrenadores-container.dark-mode-section h1.dark-mode-heading {
+  color: #eee;
+}
+
+.card-front.dark-mode-card-front,
+.card-back.dark-mode-card-back {
+  background-color: #333;
+  color: #eee;
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+}
+
+.card-front.dark-mode-card-front h3,
+.card-back.dark-mode-card-back h3,
+.card-back.dark-mode-card-back p {
+  color: #eee;
+}
+
+.habilidad.dark-mode-habilidad label.dark-mode-label {
+  color: #eee;
+}
+
+.barra.dark-mode-barra {
+  background-color: #555;
+}
+
+.relleno.dark-mode-relleno {
+  background-color: #f90; /* El color de relleno se mantiene */
+}
+
+.rating.dark-mode-rating {
+  color: #777;
+}
+
+.rating.dark-mode-rating .filled.dark-mode-filled-stars {
+  color: gold;
+}
+
+footer.dark-mode-footer {
+  background-color: #000;
+  color: #eee;
+}
+
+.redes.dark-mode-section {
+  background-color: #000;
+  color: #eee;
+}
+
+.redes.dark-mode-section a.dark-mode-link {
+  color: #eee;
+}
+
+.redes.dark-mode-section a.dark-mode-link:hover {
+  color: #ddd;
+}
+
+.menu-links.dark-mode #theme-toggle.dark-mode-button {
+  color: #eee;
+  background-color: transparent;
+  border: none;
+}
+
+.menu-links.dark-mode #theme-toggle.dark-mode-button:hover,
+.menu-links.dark-mode #theme-toggle.dark-mode-button:focus {
+  background-color: #333;
+}

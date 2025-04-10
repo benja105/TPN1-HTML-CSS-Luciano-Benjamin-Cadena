@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Contacto - Fracture</title>
+    <link rel="stylesheet" href="css/estilocontacto.css" />
+    <link rel="icon" href="img/fracture.ico" type="image/icon">
+    <link rel="stylesheet" href="css/dark-mode.css">
+</head>
+<body>
+    <header>
+        <nav class="mega-menu">
+            <a href="index.html" class="logo">FRACTURE</a>
+            <input type="checkbox" id="menu-toggle" class="menu-checkbox" aria-controls="menu-links" aria-expanded="false" aria-label="Menú de navegación">
+            <label for="menu-toggle" class="menu-icon" aria-hidden="true">&#9776;</label>
+            <ul class="menu-links" id="menu-links">
+                <li><a href="index.html">Inicio</a></li>
+                <li><a href="clases.html">Clases</a></li>
+                <li><a href="entrenadores.html">Entrenadores</a></li>
+                <li><a href="precios.html">Planes</a></li>
+                <li><a href="blog.html">Blog</a></li>
+                <li><a href="contacto.html" aria-current="page">Contacto</a></li>
+                <li>
+                    <button id="theme-toggle" aria-label="Alternar modo oscuro">Modo Oscuro</button>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="contacto-container">
+        <h1>Contacto</h1>
+        <form class="formulario" id="formulario">
+            <div class="campo">
+                <label for="nombre">Nombre</label>
+                <input type="text" id="nombre" name="nombre" required pattern="[A-Za-zÁ-ÿ\s]{3,}">
+            </div>
+
+            <div class="campo">
+                <label for="email">Correo electrónico</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+
+            <div class="campo">
+                <label for="mensaje">Mensaje</label>
+                <textarea id="mensaje" name="mensaje" required minlength="10"></textarea>
+            </div>
+
+            <button type="submit" class="btn-enviar">
+                Enviar
+                <span class="spinner" aria-hidden="true"></span>
+            </button>
+        </form>
+    </main>
+
+    <div id="modal" class="modal" aria-modal="true" role="dialog" aria-labelledby="modal-title">
+        <div class="modal-contenido">
+            <h2 id="modal-title">¡Mensaje enviado!</h2>
+            <p>Gracias por contactarte con Fracture.</p>
+            <button onclick="cerrarModal()" class="dark-mode-button" aria-label="Cerrar ventana de mensaje enviado">Cerrar</button>
+        </div>
+    </div>
+
+    <footer>
+        <div class="redes">
+            <a href="#">Facebook</a>
+            <a href="#">Instagram</a>
+            <a href="#">YouTube</a>
+        </div>
+        <p>&copy; 2025 Fracture - Todos los derechos reservados</p>
+    </footer>
+
+    <script>
+        const form = document.getElementById("formulario");
+        const modal = document.getElementById("modal");
+        const spinner = document.querySelector(".spinner");
+        const themeToggleBtn = document.getElementById('theme-toggle');
+        const body = document.body;
+        const header = document.querySelector('header');
+        const nav = document.querySelector('nav');
+        const menuToggleCheckbox = document.getElementById('menu-toggle');
+        const menuLinksList = document.getElementById('menu-links');
+        const contactoContainer = document.querySelector('.contacto-container');
+        const formulario = document.querySelector('.formulario');
+        const modalDiv = document.querySelector('.modal');
+        const modalContenido = document.querySelector('.modal-contenido');
+        const enviarBtn = document.querySelector('.btn-enviar');
+        const modalCerrarBtn = modalContenido ? modalContenido.querySelector('button') : null;
+        const footerElement = document.querySelector('footer');
+        const redesSection = document.querySelector('.redes');
+        const redesLinks = document.querySelectorAll('.redes a');
+
+        // Función para actualizar el texto y el atributo aria-pressed del botón de tema
+        function updateThemeButtonText() {
+            const isDarkMode = body.classList.contains('dark-mode');
+            themeToggleBtn.textContent = isDarkMode ? 'Modo Claro' : 'Modo Oscuro';
+            themeToggleBtn.setAttribute('aria-pressed', isDarkMode);
+        }
+
+        // Verificar el estado inicial del modo oscuro al cargar la página
+        updateThemeButtonText();
+
+        form.addEventListener("submit", function (e) {
+            e.preventDefault();
+            spinner.classList.add("activo");
+
+            setTimeout(() => {
+                spinner.classList.remove("activo");
+                modal.style.display = "flex";
+                modalToggle(true); // Asegurar que aria-hidden sea false al mostrar el modal
+                form.reset();
+            }, 1500);
+        });
+
+        function cerrarModal() {
+            modal.style.display = "none";
+            modalToggle(false); // Asegurar que aria-hidden sea true al cerrar el modal
+        }
+
+        function modalToggle(isOpen) {
+            modal.setAttribute('aria-hidden', !isOpen);
+            if (isOpen) {
+                modal.focus(); // O enfocar el primer elemento interactivo dentro del modal
+            }
+        }
+
+        menuToggleCheckbox.addEventListener('change', () => {
+            const isExpanded = menuToggleCheckbox.checked;
+            menuToggleCheckbox.setAttribute('aria-expanded', isExpanded);
+        });
+
+        themeToggleBtn.addEventListener('click', () => {
+            body.classList.toggle('dark-mode');
+            header.classList.toggle('dark-mode');
+            nav.classList.toggle('dark-mode');
+            contactoContainer.classList.toggle('dark-mode-section');
+            formulario.classList.toggle('dark-mode-card');
+            modalDiv.classList.toggle('dark-mode-modal');
+            modalContenido.classList.toggle('dark-mode-card');
+            enviarBtn.classList.toggle('dark-mode-button');
+            if (modalCerrarBtn) {
+                modalCerrarBtn.classList.toggle('dark-mode-button');
+            }
+            footerElement.classList.toggle('dark-mode-footer');
+            if (menuLinksList) {
+                menuLinksList.classList.toggle('dark-mode');
+                menuLinksList.querySelectorAll('a').forEach(link => link.classList.toggle('dark-mode-link'));
+                const themeButton = menuLinksList.querySelector('#theme-toggle');
+                if (themeButton) {
+                    themeButton.classList.toggle('dark-mode-button');
+                }
+            }
+            if (redesSection) {
+                redesSection.classList.toggle('dark-mode-section');
+                redesLinks.forEach(a => a.classList.toggle('dark-mode-link'));
+            }
+
+            // Actualizar el texto del botón después de cambiar el tema
+            updateThemeButtonText();
+        });
+    </script>
+</body>
+</html>

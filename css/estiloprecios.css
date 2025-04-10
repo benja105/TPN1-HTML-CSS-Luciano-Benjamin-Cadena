@@ -1,0 +1,535 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f8f8f8;
+  color: #333;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* HEADER */
+header {
+  background-color: #fff;
+  color: #000;
+  padding: 1rem 0;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.mega-menu {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1rem;
+  flex-wrap: wrap;
+}
+
+.mega-menu .logo {
+  font-size: 1.75rem;
+  font-weight: bold;
+  text-decoration: none;
+  color: #000;
+  transition: color 0.3s ease;
+}
+
+.mega-menu .logo:visited {
+  color: #000;
+}
+
+.menu-checkbox {
+  display: none;
+}
+
+.menu-icon {
+  display: none;
+  font-size: 2rem;
+  color: #000;
+  cursor: pointer;
+}
+
+.menu-links {
+  display: flex;
+  gap: 1.5rem;
+  list-style: none;
+  align-items: center;
+}
+
+.menu-links li a {
+  color: #000;
+  text-decoration: none;
+  padding: 0.75rem 1.25rem;
+  border-radius: 8px;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.menu-links li a:hover,
+.menu-links li a:focus {
+  background-color: #eee;
+}
+
+.menu-links li button {
+  background: none;
+  border: none;
+  color: #000;
+  font-size: 1rem;
+  cursor: pointer;
+  padding: 0.75rem 1.25rem;
+  border-radius: 8px;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.menu-links li button:hover,
+.menu-links li button:focus {
+  background-color: #eee;
+}
+
+@media (max-width: 768px) {
+  .menu-icon {
+      display: block;
+  }
+
+  .menu-links {
+      display: none;
+      flex-direction: column;
+      background-color: #fff;
+      position: absolute;
+      top: 100%;
+      right: 1rem;
+      width: calc(100% - 2rem);
+      border-radius: 8px;
+      padding: 1rem;
+      z-index: 999;
+      align-items: stretch;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  }
+
+  .menu-checkbox:checked + .menu-icon + .menu-links {
+      display: flex;
+  }
+
+  .menu-links li {
+      margin: 0.5rem 0;
+  }
+
+  .menu-links li a,
+  .menu-links li button {
+      display: block;
+      padding: 0.75rem;
+      text-align: center;
+  }
+}
+
+.precios {
+  text-align: center;
+  padding: 2rem;
+  animation: fadeIn 1s ease-in;
+}
+@keyframes fadeIn {
+  from {
+      opacity: 0;
+      transform: translateY(20px);
+  }
+  to {
+      opacity: 1;
+      transform: translateY(0);
+  }
+}
+
+/* Agrupador principal */
+.precios-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+
+/* Toggle precios */
+.toggle-precios-container {
+  display: flex;
+  align-items: center;
+  justify-content: center; /* Centra el toggle y el label */
+  gap: 1rem;
+  font-weight: bold;
+  margin-bottom: 1.5rem; /* Espacio debajo del toggle */
+}
+
+.toggle-precios {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem; /* Espacio entre el switch y el label */
+}
+
+.toggle-label {
+  transition: color 0.3s ease;
+}
+
+/* Estilo switch */
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 50px;
+  height: 28px;
+  background: #ccc;
+  border-radius: 34px;
+  cursor: pointer;
+}
+
+.slider {
+  position: absolute;
+  content: "";
+  height: 22px;
+  width: 22px;
+  left: 3px;
+  bottom: 3px;
+  background-color: white;
+  border-radius: 50%;
+  transition: transform 0.4s;
+}
+
+/* Estado del toggle: activado */
+#toggle-precio:checked + .toggle-precios-container .toggle-precios .switch .slider {
+  background-color: #f90;
+  transform: translateX(22px);
+}
+
+/* Mostrar/Ocultar precios */
+#toggle-precio ~ .tabla-planes .precio.anual {
+  display: none;
+}
+
+#toggle-precio:checked ~ .tabla-planes .precio.mensual {
+  display: none;
+}
+
+#toggle-precio:checked ~ .tabla-planes .precio.anual {
+  display: block;
+}
+
+/* Tabla de precios - Responsive */
+.tabla-planes {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 2rem;
+  padding: 2rem;
+  max-width: 1200px;
+  margin: auto;
+}
+
+.plan {
+  background-color: white;
+  border: 2px solid #ddd;
+  border-radius: 10px;
+  padding: 1.5rem;
+  width: 300px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease, background-color 0.3s ease, color 0.3s ease;
+  position: relative;
+  color: #333;
+}
+
+.plan:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+  border-color: #f90;
+}
+
+.plan h2 {
+  margin-bottom: 1rem;
+  font-size: 1.5rem;
+  color: #f90;
+  transition: color 0.3s ease;
+}
+
+.precio {
+  font-size: 2rem;
+  margin: 1rem 0;
+  font-weight: bold;
+  transition: color 0.3s ease;
+}
+
+.plan ul {
+  list-style: none;
+  padding-top: 1rem;
+}
+
+.plan ul li {
+  margin: 0.5rem 0;
+  position: relative;
+  transition: color 0.3s ease;
+}
+
+/* Tooltip */
+.tooltip {
+  position: relative;
+  cursor: help;
+  transition: color 0.3s ease;
+}
+
+.tooltip::after {
+  content: attr(data-tooltip);
+  position: absolute;
+  bottom: 125%;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #333;
+  color: white;
+  padding: 0.5rem;
+  font-size: 0.75rem;
+  border-radius: 5px;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s;
+  z-index: 1;
+}
+
+.tooltip:hover::after {
+  opacity: 1;
+}
+
+/* FOOTER */
+footer {
+  background-color: #eee;
+  color: #000;
+  text-align: center;
+  padding: 1.5rem 1rem;
+  font-size: 0.9rem;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+footer p {
+  margin-top: 0.5rem;
+}
+
+
+/* REDES */
+.redes {
+  background-color: #eee;
+  color: #000;
+  padding: 1.5rem 1rem;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.redes a {
+  color: #000;
+  text-decoration: none;
+  font-size: 1.1rem;
+  transition: color 0.3s ease;
+}
+
+.redes a:hover,
+.redes a:focus {
+  color: #333;
+}
+
+/* dark-mode.css */
+
+/* Estilos específicos para el modo oscuro */
+
+body.dark-mode {
+  background-color: #000;
+  color: #eee;
+}
+
+body.dark-mode .menu-icon {
+  color: #eee;
+}
+
+header.dark-mode {
+  background-color: #000;
+  color: #eee;
+}
+
+.mega-menu.dark-mode .logo {
+  color: #eee;
+}
+
+.mega-menu.dark-mode .logo:visited {
+  color: #eee;
+}
+
+.mega-menu.dark-mode .menu-links li a {
+  color: #eee;
+}
+
+.mega-menu.dark-mode .menu-links li a:hover,
+.mega-menu.dark-mode .menu-links li a:focus {
+  background-color: #333;
+}
+
+.mega-menu.dark-mode .menu-links li button {
+  color: #eee;
+}
+
+.mega-menu.dark-mode .menu-links li button:hover,
+.mega-menu.dark-mode .menu-links li button:focus {
+  background-color: #333;
+}
+
+@media (max-width: 768px) {
+  .mega-menu.dark-mode .menu-links {
+      background-color: #000;
+      box-shadow: 0 2px 5px rgba(255, 255, 255, 0.1);
+  }
+}
+
+.precios.dark-mode-section {
+  color: #eee;
+}
+
+.precios.dark-mode-section h1.dark-mode-heading {
+  color: #eee;
+}
+
+.toggle-precios-container.dark-mode-toggle-container .toggle-precios.dark-mode-toggle-precios .toggle-label.dark-mode-label {
+  color: #eee;
+}
+
+.toggle-precios-container.dark-mode-toggle-container .toggle-precios.dark-mode-toggle-precios .switch.dark-mode-switch {
+  background-color: #555;
+}
+
+.toggle-precios-container.dark-mode-toggle-container .toggle-precios.dark-mode-toggle-precios .switch.dark-mode-switch .slider.dark-mode-slider {
+  background-color: #eee;
+  transition: transform 0.4s;
+}
+
+#toggle-precio:checked + .toggle-precios-container.dark-mode-toggle-container .toggle-precios.dark-mode-toggle-precios .switch.dark-mode-switch .slider.dark-mode-slider {
+  background-color: #f90;
+  transform: translateX(22px);
+}
+
+.plan.dark-mode-plan {
+  background-color: #333;
+  color: #eee;
+  border-color: #555;
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
+}
+
+.plan.dark-mode-plan:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.2); /* Ligeramente más brillante el shadow */
+  border-color: #f90;
+}
+
+.plan.dark-mode-plan h2 {
+  color: #f90;
+}
+
+.plan.dark-mode-plan .precio.dark-mode-precio {
+  color: #eee;
+}
+
+.plan.dark-mode-plan ul li.dark-mode-list-item {
+  color: #eee;
+}
+
+.tooltip.dark-mode-tooltip {
+  color: #eee;
+}
+
+.tooltip.dark-mode-tooltip::after {
+  background: #222;
+  color: #eee;
+}
+
+footer.dark-mode-footer {
+  background-color: #000;
+  color: #eee;
+}
+
+.redes.dark-mode-section {
+  background-color: #000;
+  color: #eee;
+}
+
+.redes.dark-mode-section a.dark-mode-link {
+  color: #eee;
+}
+
+.redes.dark-mode-section a.dark-mode-link:hover {
+  color: #ddd;
+}
+
+.menu-links.dark-mode #theme-toggle.dark-mode-button {
+  color: #eee;
+  background-color: transparent;
+  border: none;
+}
+
+.menu-links.dark-mode #theme-toggle.dark-mode-button:hover,
+.menu-links.dark-mode #theme-toggle.dark-mode-button:focus {
+  background-color: #333;
+}
+
+/* RESPONSIVE PARA LOS CUADRADOS DE PRECIOS */
+
+/* Para pantallas más pequeñas (móviles) */
+@media (max-width: 600px) {
+  .tabla-planes {
+      flex-direction: column; /* Apilar los planes verticalmente */
+      align-items: center; /* Centrar los planes */
+      padding: 1rem;
+      gap: 1.5rem;
+  }
+
+  .plan {
+      width: 90%; /* Ocupar casi todo el ancho */
+      min-width: auto; /* Permitir que el ancho se ajuste al contenido */
+  }
+
+  .plan h2 {
+      font-size: 1.3rem;
+  }
+
+  .precio {
+      font-size: 1.75rem;
+  }
+
+  .plan ul li {
+      font-size: 0.9rem;
+  }
+}
+
+/* Para tabletas */
+@media (min-width: 601px) and (max-width: 900px) {
+  .tabla-planes {
+      flex-direction: row; /* Mantener en fila */
+      justify-content: space-around; /* Espacio entre los planes */
+      padding: 1.5rem;
+      gap: 1.5rem;
+  }
+
+  .plan {
+      width: calc(50% - 1rem); /* Dos planes por fila con espacio */
+      min-width: auto;
+  }
+
+  /* Si hay un número impar de planes, centrar el último */
+  .tabla-planes:nth-child(odd) {
+      width: 100%;
+  }
+}
+
+/* Para pantallas medianas (desktops pequeños) - Opcional, ajusta según necesites */
+@media (min-width: 901px) and (max-width: 1200px) {
+  .tabla-planes {
+      gap: 1.5rem;
+  }
+
+  .plan {
+      width: calc(33.33% - 1rem); /* Tres planes por fila con espacio */
+  }
+}

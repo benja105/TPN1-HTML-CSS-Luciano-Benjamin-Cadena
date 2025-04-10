@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Planes - Fracture</title>
+  <link rel="stylesheet" href="css/estiloprecios.css" />
+  <link rel="icon" href="img/fracture.ico" type="image/icon">
+  <link rel="stylesheet" href="css/dark-mode.css">
+</head>
+<body class="light-mode">
+  <header>
+    <nav class="mega-menu">
+      <a href="index.html" class="logo">FRACTURE</a>
+      <input type="checkbox" id="menu-toggle" class="menu-checkbox" />
+      <label for="menu-toggle" class="menu-icon">&#9776;</label>
+      <ul class="menu-links">
+        <li><a href="index.html">Inicio</a></li>
+        <li><a href="clases.html">Clases</a></li>
+        <li><a href="entrenadores.html">Entrenadores</a></li>
+        <li><a href="precios.html">Planes</a></li>
+        <li><a href="blog.html">Blog</a></li>
+        <li><a href="contacto.html">Contacto</a></li>
+        <li>
+          <button id="theme-toggle">Modo Oscuro</button>
+        </li>
+      </ul>
+    </nav>
+  </header>
+
+  <main class="precios light-mode-section">
+    <h1 class="light-mode-heading">Compará nuestros planes</h1>
+
+    <div class="precios-wrapper light-mode-wrapper">
+      <input type="checkbox" id="toggle-precio" class="toggle-precio-input" hidden>
+
+      <div class="toggle-precios-container">
+        <div class="toggle-precios">
+          <label class="switch" for="toggle-precio">
+            <span class="slider"></span>
+          </label>
+          <span class="toggle-label light-mode-label">Mostrar precios anuales</span>
+        </div>
+      </div>
+
+      <div class="tabla-planes light-mode-tabla-planes">
+        <div class="plan basico light-mode-plan">
+          <h2 class="light-mode-heading">Básico</h2>
+          <p class="precio mensual light-mode-precio">$5.000 /M</p>
+          <p class="precio anual light-mode-precio">$45.000 /A</p>
+          <ul>
+            <li class="light-mode-list-item"><span class="tooltip light-mode-tooltip" data-tooltip="Acceso en horario limitado.">Acceso parcial</span></li>
+            <li class="light-mode-list-item"><span class="tooltip light-mode-tooltip" data-tooltip="No incluye clases dirigidas.">Sin clases</span></li>
+            <li class="light-mode-list-item"><span class="tooltip light-mode-tooltip" data-tooltip="Solo uso de máquinas.">Máquinas básicas</span></li>
+          </ul>
+        </div>
+
+        <div class="plan intermedio light-mode-plan">
+          <h2 class="light-mode-heading">Intermedio</h2>
+          <p class="precio mensual light-mode-precio">$7.000 /M</p>
+          <p class="precio anual light-mode-precio">$60.000 /A</p>
+          <ul>
+            <li class="light-mode-list-item"><span class="tooltip light-mode-tooltip" data-tooltip="Acceso total durante el día.">Acceso completo</span></li>
+            <li class="light-mode-list-item"><span class="tooltip light-mode-tooltip" data-tooltip="Incluye hasta 3 clases semanales.">Clases limitadas</span></li>
+            <li class="light-mode-list-item"><span class="tooltip light-mode-tooltip" data-tooltip="Uso de máquinas y zona funcional.">Zona funcional</span></li>
+          </ul>
+        </div>
+
+        <div class="plan premium light-mode-plan">
+          <h2 class="light-mode-heading">Premium</h2>
+          <p class="precio mensual light-mode-precio">$10.000 /M</p>
+          <p class="precio anual light-mode-precio">$85.000 /A</p>
+          <ul>
+            <li class="light-mode-list-item"><span class="tooltip light-mode-tooltip" data-tooltip="Acceso sin restricciones horarias.">Acceso ilimitado</span></li>
+            <li class="light-mode-list-item"><span class="tooltip light-mode-tooltip" data-tooltip="Todas las clases incluidas.">Todas las clases</span></li>
+            <li class="light-mode-list-item"><span class="tooltip light-mode-tooltip" data-tooltip="Incluye sauna y nutricionista.">Beneficios extra</span></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </main>
+
+
+  <footer class="light-mode-footer">
+    <div class="redes light-mode-section">
+      <a href="#" class="light-mode-link">Facebook</a>
+      <a href="#" class="light-mode-link">Instagram</a>
+      <a href="#" class="light-mode-link">YouTube</a>
+    </div>
+    <p>&copy; 2025 Fracture - Todos los derechos reservados</p>
+  </footer>
+  <script>
+    // Modo Oscuro
+  const themeToggleBtn = document.getElementById('theme-toggle');
+  const body = document.body;
+  const header = document.querySelector('header');
+  const nav = document.querySelector('nav');
+  const menuLinks = document.querySelector('.menu-links');
+  const preciosSection = document.querySelector('.precios');
+  const preciosWrapper = document.querySelector('.precios-wrapper');
+  const togglePrecioInput = document.getElementById('toggle-precio');
+  const toggleLabelElement = document.querySelector('.toggle-label');
+  const tablaPlanes = document.querySelector('.tabla-planes');
+  const planes = document.querySelectorAll('.plan');
+  const preciosMensuales = document.querySelectorAll('.precio.mensual');
+  const preciosAnuales = document.querySelectorAll('.precio.anual');
+  const tooltipTexts = document.querySelectorAll('.tooltip');
+  const redesSection = document.querySelector('.redes');
+  const footerElement = document.querySelector('footer');
+  const menuLinksA = document.querySelectorAll('.menu-links a');
+  const redesLinksA = document.querySelectorAll('.redes a');
+  const logo = document.querySelector('.logo');
+  const themeButtonMenu = document.querySelector('.menu-links #theme-toggle');
+  const h1 = preciosSection ? preciosSection.querySelector('h1') : null;
+  const switchLabelElement = document.querySelector('.switch');
+  const sliderElement = switchLabelElement ? switchLabelElement.querySelector('.slider') : null;
+  const planHeaders = document.querySelectorAll('.plan h2');
+  const planPrecios = document.querySelectorAll('.plan .precio');
+  const planListItems = document.querySelectorAll('.plan ul li');
+  const tooltips = document.querySelectorAll('.tooltip');
+  const togglePreciosContainer = document.querySelector('.toggle-precios-container');
+  const togglePreciosDiv = document.querySelector('.toggle-precios');
+
+  function toggleDarkMode() {
+    body.classList.add('dark-mode');
+    if (header) header.classList.add('dark-mode');
+    if (nav) nav.classList.add('dark-mode');
+    if (menuLinks) menuLinks.classList.add('dark-mode');
+    if (preciosSection) preciosSection.classList.add('dark-mode-section');
+    if (preciosWrapper) preciosWrapper.classList.add('dark-mode-wrapper');
+    if (togglePreciosContainer) togglePreciosContainer.classList.add('dark-mode-toggle-container');
+    if (togglePreciosDiv) togglePreciosDiv.classList.add('dark-mode-toggle-precios');
+    if (toggleLabelElement) toggleLabelElement.classList.add('dark-mode-label');
+    if (switchLabelElement) switchLabelElement.classList.add('dark-mode-switch');
+    if (sliderElement) sliderElement.classList.add('dark-mode-slider');
+    if (tablaPlanes) tablaPlanes.classList.add('dark-mode-tabla-planes');
+    planes.forEach(plan => plan.classList.add('dark-mode-plan'));
+    preciosMensuales.forEach(precio => precio.classList.add('dark-mode-precio'));
+    preciosAnuales.forEach(precio => precio.classList.add('dark-mode-precio'));
+    tooltips.forEach(tooltip => tooltip.classList.add('dark-mode-tooltip'));
+    if (redesSection) redesSection.classList.add('dark-mode-section');
+    if (footerElement) footerElement.classList.add('dark-mode-footer');
+    menuLinksA.forEach(link => link.classList.add('dark-mode-link'));
+    redesLinksA.forEach(link => link.classList.add('dark-mode-link'));
+    if (logo) logo.classList.add('dark-mode');
+    if (themeButtonMenu) themeButtonMenu.classList.add('dark-mode-button');
+    if (h1) h1.classList.add('dark-mode-heading');
+    planHeaders.forEach(h => h.classList.add('dark-mode-heading'));
+    planPrecios.forEach(p => p.classList.add('dark-mode-precio'));
+    planListItems.forEach(li => li.classList.add('dark-mode-list-item'));
+
+    body.classList.remove('light-mode');
+    if (header) header.classList.remove('light-mode');
+    if (nav) nav.classList.remove('light-mode');
+    if (menuLinks) menuLinks.classList.remove('light-mode');
+    if (preciosSection) preciosSection.classList.remove('light-mode-section');
+    if (preciosWrapper) preciosWrapper.classList.remove('light-mode-wrapper');
+    if (togglePreciosContainer) togglePreciosContainer.classList.remove('light-mode-toggle-container');
+    if (togglePreciosDiv) togglePreciosDiv.classList.remove('light-mode-toggle-precios');
+    if (toggleLabelElement) toggleLabelElement.classList.remove('light-mode-label');
+    if (switchLabelElement) switchLabelElement.classList.remove('light-mode-switch');
+    if (sliderElement) sliderElement.classList.remove('light-mode-slider');
+    if (tablaPlanes) tablaPlanes.classList.remove('light-mode-tabla-planes');
+    planes.forEach(plan => plan.classList.remove('light-mode-plan'));
+    preciosMensuales.forEach(precio => precio.classList.remove('light-mode-precio'));
+    preciosAnuales.forEach(precio => precio.classList.remove('light-mode-precio'));
+    tooltips.forEach(tooltip => tooltip.classList.remove('light-mode-tooltip'));
+    if (redesSection) redesSection.classList.remove('light-mode-section');
+    if (footerElement) footerElement.classList.remove('light-mode-footer');
+    menuLinksA.forEach(link => link.classList.remove('light-mode-link'));
+    redesLinksA.forEach(link => link.classList.remove('light-mode-link'));
+    if (logo) logo.classList.remove('light-mode');
+    if (themeButtonMenu) themeButtonMenu.classList.remove('light-mode-button');
+    if (h1) h1.classList.remove('light-mode-heading');
+    planHeaders.forEach(h => h.classList.remove('light-mode-heading'));
+    planPrecios.forEach(p => p.classList.remove('light-mode-precio'));
+    planListItems.forEach(li => li.classList.remove('light-mode-list-item'));
+
+    if (themeToggleBtn) {
+      themeToggleBtn.textContent = 'Modo Claro';
+    }
+  }
+
+  function toggleLightMode() {
+    body.classList.add('light-mode');
+    if (header) header.classList.add('light-mode');
+    if (nav) nav.classList.add('light-mode');
+    if (menuLinks) menuLinks.classList.add('light-mode');
+    if (preciosSection) preciosSection.classList.add('light-mode-section');
+    if (preciosWrapper) preciosWrapper.classList.add('light-mode-wrapper');
+    if (togglePreciosContainer) togglePreciosContainer.classList.add('light-mode-toggle-container');
+    if (togglePreciosDiv) togglePreciosDiv.classList.add('light-mode-toggle-precios');
+    if (toggleLabelElement) toggleLabelElement.classList.add('light-mode-label');
+    if (switchLabelElement) switchLabelElement.classList.add('light-mode-switch');
+    if (sliderElement) sliderElement.classList.add('light-mode-slider');
+    if (tablaPlanes) tablaPlanes.classList.add('light-mode-tabla-planes');
+    planes.forEach(plan => plan.classList.add('light-mode-plan'));
+    preciosMensuales.forEach(precio => precio.classList.add('light-mode-precio'));
+    preciosAnuales.forEach(precio => precio.classList.add('light-mode-precio'));
+    tooltips.forEach(tooltip => tooltip.classList.add('light-mode-tooltip'));
+    if (redesSection) redesSection.classList.add('light-mode-section');
+    if (footerElement) footerElement.classList.add('light-mode-footer');
+    menuLinksA.forEach(link => link.classList.add('light-mode-link'));
+    redesLinksA.forEach(link => link.classList.add('light-mode-link'));
+    if (logo) logo.classList.add('light-mode');
+    if (themeButtonMenu) themeButtonMenu.classList.add('light-mode-button');
+    if (h1) h1.classList.add('light-mode-heading');
+    planHeaders.forEach(h => h.classList.add('light-mode-heading'));
+    planPrecios.forEach(p => p.classList.add('light-mode-precio'));
+    planListItems.forEach(li => li.classList.add('light-mode-list-item'));
+
+    body.classList.remove('dark-mode');
+    if (header) header.classList.remove('dark-mode');
+    if (nav) nav.classList.remove('dark-mode');
+    if (menuLinks) menuLinks.classList.remove('dark-mode');
+    if (preciosSection) preciosSection.classList.remove('dark-mode-section');
+    if (preciosWrapper) preciosWrapper.classList.remove('dark-mode-wrapper');
+    if (togglePreciosContainer) togglePreciosContainer.classList.remove('dark-mode-toggle-container');
+    if (togglePreciosDiv) togglePreciosDiv.classList.remove('dark-mode-toggle-precios');
+    if (toggleLabelElement) toggleLabelElement.classList.remove('dark-mode-label');
+    if (switchLabelElement) switchLabelElement.classList.remove('dark-mode-switch');
+    if (sliderElement) sliderElement.classList.remove('dark-mode-slider');
+    if (tablaPlanes) tablaPlanes.classList.remove('dark-mode-tabla-planes');
+    planes.forEach(plan => plan.classList.remove('dark-mode-plan'));
+    preciosMensuales.forEach(precio => precio.classList.remove('dark-mode-precio'));
+    preciosAnuales.forEach(precio => precio.classList.remove('dark-mode-precio'));
+    tooltips.forEach(tooltip => tooltip.classList.remove('dark-mode-tooltip'));
+    if (redesSection) redesSection.classList.remove('dark-mode-section');
+    if (footerElement) footerElement.classList.remove('dark-mode-footer');
+    menuLinksA.forEach(link => link.classList.remove('dark-mode-link'));
+    redesLinksA.forEach(link => link.classList.remove('dark-mode-link'));
+    if (logo) logo.classList.remove('dark-mode');
+    if (themeButtonMenu) themeButtonMenu.classList.remove('dark-mode-button');
+    if (h1) h1.classList.remove('dark-mode-heading');
+    planHeaders.forEach(h => h.classList.remove('dark-mode-heading'));
+    planPrecios.forEach(p => p.classList.remove('dark-mode-precio'));
+    planListItems.forEach(li => li.classList.remove('dark-mode-list-item'));
+
+    if (themeToggleBtn) {
+      themeToggleBtn.textContent = 'Modo Oscuro';
+    }
+  }
+
+  themeToggleBtn.addEventListener('click', () => {
+    if (body.classList.contains('dark-mode')) {
+      toggleLightMode();
+    } else {
+      toggleDarkMode();
+    }
+  });
+  </script>
+</body>
+</html>

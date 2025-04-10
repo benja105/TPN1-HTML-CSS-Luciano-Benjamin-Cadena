@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Entrenadores - Fracture</title>
+  <link rel="stylesheet" href="css/estiloentrenadores.css" />
+  <link rel="stylesheet" href="css/animaciones.css">
+  <link rel="icon" href="img/fracture.ico" type="image/icon">
+  <link rel="stylesheet" href="css/dark-mode.css">
+</head>
+<body>
+  <header>
+    <nav class="mega-menu">
+      <a href="index.html" class="logo">FRACTURE</a>
+      <input type="checkbox" id="menu-toggle" class="menu-checkbox" />
+      <label for="menu-toggle" class="menu-icon">&#9776;</label>
+      <ul class="menu-links">
+        <li><a href="index.html">Inicio</a></li>
+        <li><a href="clases.html">Clases</a></li>
+        <li><a href="entrenadores.html">Entrenadores</a></li>
+        <li><a href="precios.html">Planes</a></li>
+        <li><a href="blog.html">Blog</a></li>
+        <li><a href="contacto.html">Contacto</a></li>
+        <li>
+          <button id="theme-toggle">Modo Oscuro</button>
+        </li>
+      </ul>
+    </nav>
+  </header>
+
+  <main class="entrenadores-container">
+    <h1>Nuestros Entrenadores</h1>
+
+    <div class="cards-container">
+      <div class="card-flip">
+        <div class="card-inner">
+          <div class="card-front">
+            <img src="img/entrenador1.jpg" alt="Entrenador 1">
+            <h3>Lucas</h3>
+          </div>
+          <div class="card-back">
+            <h3>Lucas - Musculación</h3>
+            <p>Especialista en fuerza y volumen muscular.</p>
+
+            <div class="habilidad">
+              <label>Fuerza</label>
+              <div class="barra"><div class="relleno fuerza90"></div></div>
+            </div>
+            <div class="habilidad">
+              <label>Flexibilidad</label>
+              <div class="barra"><div class="relleno flex80"></div></div>
+            </div>
+
+            <div class="rating">
+              ★★★★★
+              <div class="filled">★★★★★</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card-flip">
+        <div class="card-inner">
+          <div class="card-front">
+            <img src="img/entrenador2.jpg" alt="Camila">
+            <h3>Camila</h3>
+          </div>
+          <div class="card-back">
+            <h3>Camila - Yoga</h3>
+            <p>Especialista en yoga y movilidad consciente.</p>
+
+            <div class="habilidad">
+              <label>Flexibilidad</label>
+              <div class="barra"><div class="relleno flex95"></div></div>
+            </div>
+            <div class="habilidad">
+              <label>Resistencia</label>
+              <div class="barra"><div class="relleno res75"></div></div>
+            </div>
+
+            <div class="rating">
+              ★★★★★
+              <div class="filled" style="width: 90%;">★★★★★</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card-flip">
+        <div class="card-inner">
+          <div class="card-front">
+            <img src="img/entrenador3.jpg" alt="Diego">
+            <h3>Diego</h3>
+          </div>
+          <div class="card-back">
+            <h3>Diego - Crossfit</h3>
+            <p>Entrenador funcional y de alto rendimiento.</p>
+
+            <div class="habilidad">
+              <label>Potencia</label>
+              <div class="barra"><div class="relleno pot85"></div></div>
+            </div>
+            <div class="habilidad">
+              <label>Velocidad</label>
+              <div class="barra"><div class="relleno vel80"></div></div>
+            </div>
+
+            <div class="rating">
+              ★★★★★
+              <div class="filled" style="width: 80%;">★★★★★</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <footer>
+    <div class="redes">
+      <a href="#">Facebook</a>
+      <a href="#">Instagram</a>
+      <a href="#">YouTube</a>
+    </div>
+    <p>&copy; 2025 Fracture - Todos los derechos reservados</p>
+  </footer>
+  <script>
+    // Modo Oscuro
+    const themeToggleBtn = document.getElementById('theme-toggle');
+    const body = document.body;
+    const header = document.querySelector('header');
+    const nav = document.querySelector('nav');
+    const menuLinks = document.querySelector('.menu-links');
+    const entrenadoresContainer = document.querySelector('.entrenadores-container');
+    const cardsContainer = document.querySelector('.cards-container');
+    const cardFronts = document.querySelectorAll('.card-front');
+    const cardBacks = document.querySelectorAll('.card-back');
+    const habilidadesLabels = document.querySelectorAll('.habilidad label');
+    const barras = document.querySelectorAll('.barra');
+    const rellenos = document.querySelectorAll('.relleno');
+    const ratings = document.querySelectorAll('.rating');
+    const filledStars = document.querySelectorAll('.filled');
+    const redesSection = document.querySelector('.redes');
+    const footerElement = document.querySelector('footer');
+
+    themeToggleBtn.addEventListener('click', () => {
+      body.classList.toggle('dark-mode');
+      header.classList.toggle('dark-mode');
+      nav.classList.toggle('dark-mode');
+      if (menuLinks) {
+        menuLinks.classList.toggle('dark-mode');
+        menuLinks.querySelectorAll('a').forEach(link => link.classList.toggle('dark-mode-link'));
+        const themeButton = menuLinks.querySelector('#theme-toggle');
+        if (themeButton) {
+          themeButton.classList.toggle('dark-mode-button');
+        }
+      }
+      if (entrenadoresContainer) {
+        entrenadoresContainer.classList.toggle('dark-mode-section');
+        entrenadoresContainer.querySelector('h1').classList.toggle('dark-mode-heading');
+      }
+      if (cardsContainer) {
+        cardsContainer.classList.toggle('dark-mode-cards-container');
+      }
+      cardFronts.forEach(card => card.classList.toggle('dark-mode-card-front'));
+      cardBacks.forEach(card => card.classList.toggle('dark-mode-card-back'));
+      habilidadesLabels.forEach(label => label.classList.toggle('dark-mode-label'));
+      barras.forEach(barra => barra.classList.toggle('dark-mode-barra'));
+      rellenos.forEach(relleno => relleno.classList.toggle('dark-mode-relleno'));
+      ratings.forEach(rating => rating.classList.toggle('dark-mode-rating'));
+      filledStars.forEach(filled => filled.classList.toggle('dark-mode-filled-stars'));
+      if (redesSection) {
+        redesSection.classList.toggle('dark-mode-section');
+        redesSection.querySelectorAll('a').forEach(a => a.classList.toggle('dark-mode-link'));
+      }
+      footerElement.classList.toggle('dark-mode-footer');
+
+      if (body.classList.contains('dark-mode')) {
+        themeToggleBtn.textContent = 'Modo Claro';
+      } else {
+        themeToggleBtn.textContent = 'Modo Oscuro';
+      }
+    });
+  </script>
+</body>
+</html>
